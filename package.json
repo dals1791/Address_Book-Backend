@@ -1,0 +1,33 @@
+{
+  "name": "GA-Capstone-backend",
+  "version": "1.0.0",
+  "description": "## App Description :  An address book that allows users to store both personal and business contacts. The app will automatically update the user's \"connection's\" information when the \"connection\" updates their own  user information (aka google docs/social media esque).",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dals1791/GA-Capstone-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dals1791/GA-Capstone-backend/issues"
+  },
+  "homepage": "https://github.com/dals1791/GA-Capstone-backend#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.21.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
+    "mongoose": "^5.11.18",
+    "morgan": "^1.10.0"
+  }
+}

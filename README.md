@@ -11,10 +11,10 @@ An address book that allows users to store both personal and business contacts. 
 
 ## Project Links
 - Backend
-    - Github: TBD
+    - Github: [https://github.com/dals1791/GA-Capstone-backend/tree/main](https://github.com/dals1791/GA-Capstone-backend/tree/main)
     - live: TBD
 - FrontEnd
-    - Github: TBD
+    - Github: [https://github.com/dals1791/GA-Capstone-frontend](https://github.com/dals1791/GA-Capstone-frontend)
     - Live: TBD
 
 
