@@ -11,6 +11,9 @@ const root = gql`
     type Mutation {
         empty: String #the types cannot be empty so empty: placeholder is put in
     }
-
+    schema {
+    query: Query
+    mutation: Mutation
+    }
 `
 module.exports = root

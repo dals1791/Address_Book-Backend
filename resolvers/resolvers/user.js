@@ -13,12 +13,13 @@ const user = {
     Mutation: {
         createUser: async (parent, args, ctx, info) =>{
             const {name, username, password, handle} = args.input;
-
-            await userValidate.validateAsync(args.input)
-            // const hashedPassword = await bcrypt.hash({password}, 12)
-           
-           const createUser = await User.create({name, username, handle, password} );
-           return [createUser]
+            try{
+                await userValidate.validateAsync(args.input)
+                return  User.create(args.input)
+            } catch (error){throw error}
+               
+            
+            
         }
 
     }
