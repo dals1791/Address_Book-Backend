@@ -1,15 +1,17 @@
 const { ApolloServer } =require('apollo-server-express') 
 const express = require('express');
-// require('dotenv').config()
 const typeDefs =require( "./typeDefs")
 const resolvers =require("./resolvers") 
-// const {PORT} = process.env;
-
+const auth = require('./configs/auth')
 // Call express
 const app = express()
+//====================== MiddleWare====================
+app.use(auth)
+// ====================================================
 
 // Create apollo server with typeDefs and resolvers
 const server = new ApolloServer({typeDefs,resolvers});
+
 // apply middleware for apolloserver
 server.applyMiddleware({ app });
 
