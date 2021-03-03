@@ -11,17 +11,24 @@ const auth = {
             if (!user){
                 throw new Error('User does not exist')
             }
-            const passwordCheck = bcrypt.compare(password, user.password)
-            console.log(password, user.password, passwordCheck)
-            if (passwordCheck===false){
-                throw new Error('Password does not match username')
-            }
-            const token = jwt.sign(
-                {userId: user.id},
-                'addresssecretkey',
-                { expiresIn: '2h'}
-            )
-            return { userId: user.id, token: token, tokenExpiration: 2 } 
+            await bcrypt.compare(password, user.password).then((result)=>{
+                console.log(password, user.password, result)
+                if (result){
+                    const token = jwt.sign(
+                        {userId: user.id},
+                        'addresssecretkey',
+                        { expiresIn: '2h'}
+                    )
+                    console.log(user.id, token)
+                    return ( {userId: user.id, token: token,  tokenExpiration: 2} )
+                    
+                }else{
+                    throw new Error('Password does not match username')
+                }
+                 
+            }).catch(error=>{})
+        
+            
             
         }
     }
