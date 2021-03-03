@@ -1,8 +1,10 @@
-// const root = require('./root')
+const root = require('./root')
 const user = require('./typeDefs/user')
+const auth = require('./typeDefs/auth')
 
 module.exports = [
-
-    user
+    root,
+    user,
+    auth
 ]
 

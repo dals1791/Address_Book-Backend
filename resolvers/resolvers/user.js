@@ -1,4 +1,5 @@
 const User = require('../../models/user')
+// const bcrypt = require('bcryptjs')
 const userValidate = require('../../configs/validate-schema')
 // const Joi = require('joi')
 const user = {
@@ -14,9 +15,9 @@ const user = {
             const {name, username, password, handle} = args.input;
 
             await userValidate.validateAsync(args.input)
-            
+            // const hashedPassword = await bcrypt.hash({password}, 12)
            
-           const createUser = await User.create(args.input);
+           const createUser = await User.create({name, username, handle, password} );
            return [createUser]
         }
 

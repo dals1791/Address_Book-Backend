@@ -1,4 +1,6 @@
 const Joi = require('joi')
+
+// https://joi.dev/api/?v=17.4.0#general-usage
 const pattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
 
 const userValidate= Joi.object({
