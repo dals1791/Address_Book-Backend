@@ -8,7 +8,26 @@ const userSchema = new Schema(
         username: {type: String, unique: true, lowercase: true},
         password: String,
         name: String,
-        handle: {type: String, unique: true}
+        handle: {type: String, unique: true},
+        personalContact: {
+            
+                address: {
+                    street: String, 
+                    aptNum: Number,
+                    city: String,
+                    state: String,
+                    zipcode: Number
+                },
+                phone: {
+                    phone: Number,
+                    
+                },
+                email: {
+                    email: String,
+                   
+                }
+            
+        }
     },
     {
         timestamps: true

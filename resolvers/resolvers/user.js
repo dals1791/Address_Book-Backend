@@ -17,11 +17,15 @@ const user = {
                 await userValidate.validateAsync(args.input)
                 return  User.create(args.input)
             } catch (error){throw error}
-               
-            
+        },
+
+        addContactInfo: async (parent, args, context, info)=>{
+            try{
+               return User.findByIdAndUpdate(args.userId, {personalContact: args.input})
+            }catch (error){throw error}
             
         }
-
+        
     }
 }
 module.exports = user
