@@ -2,7 +2,7 @@ const {gql} = require('apollo-server-express')
 
 const user = gql`
      type Query {
-        user(id:ID!): User
+        user(id:ID): User
         users:[User!]!
     }
      type Mutation {
@@ -10,7 +10,7 @@ const user = gql`
     }
     
     type User {
-        id:ID!
+        id:ID
         username: String!
         password: String!
         handle: String!
@@ -20,7 +20,7 @@ const user = gql`
         username: String!
         password: String!
         name: String!
-        handle: String!
+        handle: String! 
     }
     schema {
     query: Query
