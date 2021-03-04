@@ -13,8 +13,10 @@ const app = express()
 const server = new ApolloServer({
     typeDefs,
     resolvers, 
-    context: ({req})=>{return authJWT(req)}
-         
+//     context: ({req})=>{
+//         const authHeader = req.headers.authorization || "";
+//         return authJWT(authHeader)     
+// }
 })
 
 
