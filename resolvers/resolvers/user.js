@@ -20,6 +20,10 @@ const user = {
         },
 
         addContactInfo: async (parent, args, context, info)=>{
+            
+            if (context.userId!=args.userId){
+                throw new Error("Please Login, not authenticated")
+            }
             try{
                return User.findByIdAndUpdate(args.userId, {personalContact: args.input})
             }catch (error){throw error}
