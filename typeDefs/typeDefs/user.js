@@ -2,13 +2,14 @@ const {gql} = require('apollo-server-express')
 
 const user = gql`
      extend type Query {
-        user(_id: ID!): User!
+        user(input: Handle!): User!
         users:[User!]!
+        # connections(userId: ID!):User
         
     }
-    extend type Mutation {
-        createUser(input: newUser): User
+    extend type Mutation {      
         addContactInfo(input: newContact, userId: ID!): User
+        
     }
     
     type User {
@@ -18,6 +19,12 @@ const user = gql`
         handle: String
         name: String
         personalContact: Contact
+        connections: [Connection]
+        groups: [Group]
+    }
+    
+    input Handle{
+        handle: String
     }
     input newUser{
         username: String!
