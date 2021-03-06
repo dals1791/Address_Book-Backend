@@ -4,7 +4,8 @@ const connections = {
     Mutation: {
         addConnection: async (parent, args, context, info)=>{
             try{
-                const userA = await User.findOne({_id: args.userId})
+                const userA = await User.findByIdAndUpdate({_id: args.userId})
+                console.log(userA)
                 if (args.input==args.userId){
                     throw new Error('You cannot add yourself')
                 }
@@ -12,11 +13,8 @@ const connections = {
                     throw new Error("You're already connected")
                 }
                 
-                 return User.findByIdAndUpdate(
-                    {_id: args.userId}, 
-                    {$push: {connections: args.input}},
-                    {new: true}
-                ).populate('User')
+                await userA.connections.push(args.input)
+               return await userA.save()
                 
         
                 
@@ -24,5 +22,10 @@ const connections = {
             }catch (error){ throw error}
         }
     }
+    // Connection: {
+    //     user: async(User)=>{
+    //         return (await User.populate('user').execPopulate()).User
+    //     }
+    // }
 }
 module.exports = connections

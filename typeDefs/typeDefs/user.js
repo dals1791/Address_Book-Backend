@@ -19,7 +19,7 @@ const user = gql`
         handle: String
         name: String
         personalContact: Contact
-        connections: [Connection]
+        connections: [User]
         groups: [Group]
     }
     

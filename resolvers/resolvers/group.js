@@ -7,10 +7,10 @@ module.exports ={
             const {userId, title, connectionIds} = args
             
             try{
-               const group =  await Group.create({title: title, connections: connectionIds})
+               const group =  await Group.create({title: title, connections: [connectionIds]})
                console.log(group)
                 const user = await User.findByIdAndUpdate({_id: userId})
-                await user.groups.push(group);
+                await user.groups.push(group._id);
                 return await user.save()                
 
             }catch(error){throw error}
@@ -20,8 +20,8 @@ module.exports ={
             const user= await User.findOne({_id: args.userId})
         
             const groupIndex= user.groups.findIndex((ele)=>ele == args.groupId) 
-          
-            await user.groups.splice(groupIndex, 1)
+            await Group.findByIdAndRemove(({_id: args.groupId}))
+            return await user.groups.splice(groupIndex, 1)
             
         }
     },

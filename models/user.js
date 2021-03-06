@@ -30,7 +30,7 @@ const userSchema = new Schema(
         },
         connections: [{
             type: Schema.Types.ObjectId,
-            ref: "Connections"
+            ref: "User"
         }],
         groups: [{
             type: Schema.Types.ObjectId,

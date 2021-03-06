@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const connectionSchema = new Schema(
    {
     User: {type:Schema.Types.ObjectId,
-        ref:"Users" }
+        ref:"User" }
    } 
 
         

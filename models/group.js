@@ -6,7 +6,7 @@ const groupSchema = new Schema(
    {
     title: String,
     connections: [{type:Schema.Types.ObjectId,
-        ref:"Connections" }]
+        ref:"User" }]
    } 
 
         
