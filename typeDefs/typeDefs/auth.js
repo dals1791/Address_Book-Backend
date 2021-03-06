@@ -5,6 +5,9 @@ const login = gql`
         login(username: String!, password: String!): UserAuthInfo
        
     }
+    extend type Mutation{
+        createUser(input: newUser): User
+    }
     type UserAuthInfo {
         userId: ID!
         token: String!

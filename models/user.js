@@ -27,10 +27,15 @@ const userSchema = new Schema(
                    
                 }
             
-        }
-    },
-    {
-        timestamps: true
+        },
+        connections: [{
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }],
+        groups: [{
+            type: Schema.Types.ObjectId,
+            ref: "Groups"
+        }]
     }
 )
 // mongoose pre-middleware: Pre middleware functions are executed one after another, when each middleware calls next.
@@ -42,6 +47,6 @@ userSchema.pre('save', async function(next) {
     }
   });
 
-const User = mongoose.model('user', userSchema)
+const User = mongoose.model('User', userSchema)
 
 module.exports = User

@@ -1,31 +1,23 @@
 const jwt = require('jsonwebtoken')
 // Express Middleware for authentication of user JWT. middleware format: function (req, res, next)=>{}
-const auth = (req, res, next)=>{
-const header = req.get('Authorization');
-    if (!header){
-        req.authTrue = false
-        return next()
+const authJWT = (authHeader)=>{
+    // const authHeader = req.headers.authorization || "";
+    if (!authHeader){
+        console.log("You are not logged in")
     }
-    const token = header.split(' ')[1] //token is in bearer <token>, split on whitespace [bearer, token]
+    const token = authHeader.split(' ')[1] //token is in bearer <token>, split on whitespace [bearer, token]
         if (!token || token ===''){
-            req.authTrue = false
-            return next()
+            throw new Error('There is no Token')
         }
         let decodedToken;
         try{
-        decodedToken=jwt.verify(token, 'addresssecretkey' )
+            decodedToken=jwt.verify(token, 'addresssecretkey' )
+    
+            return decodedToken
         }
         catch(error){
-            req.authTrue = false
-            return next()
-        }
-        if (!decodedToken){
-            req.authTrue = false
-            return next()
-        }
-        req.authTrue = true
-        req.userId = decodedToken.userId
-        next()
+            throw new Error('token is invalid')
+        }   
+ }
 
-}
-module.exports = auth
+module.exports = authJWT

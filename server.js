@@ -2,15 +2,26 @@ const { ApolloServer } =require('apollo-server-express')
 const express = require('express');
 const typeDefs =require( "./typeDefs")
 const resolvers =require("./resolvers") 
-const auth = require('./configs/auth')
+const authJWT = require('./configs/auth')
 // Call express
 const app = express()
 //====================== MiddleWare====================
-app.use(auth)
+// app.use(authJWT)
 // ====================================================
 
 // Create apollo server with typeDefs and resolvers
-const server = new ApolloServer({typeDefs,resolvers});
+const server = new ApolloServer({
+    typeDefs,
+    resolvers, 
+    // context: ({req})=>{
+
+    // }
+// : ({req})=>{
+//         const authHeader = req.headers.authorization || "";
+//         return authJWT(authHeader)     
+// }
+})
+
 
 // apply middleware for apolloserver
 server.applyMiddleware({ app });
