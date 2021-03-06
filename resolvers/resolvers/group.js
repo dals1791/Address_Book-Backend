@@ -15,7 +15,13 @@ module.exports ={
             }catch(error){throw error}
         },
         destroyGroup: async (parent, args, context, info)=>{
-            return await Group.findByIdAndDelete({_id: args})
+            
+            const user= await User.findOne({_id: args.userId})
+        
+            const groupIndex= user.groups.findIndex((ele)=>ele ==args.groupId) 
+          
+            await user.groups.splice(groupIndex, 1)
+            user.save()
         }
     }
 }

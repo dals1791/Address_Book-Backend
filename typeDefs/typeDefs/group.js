@@ -3,7 +3,7 @@ const {gql} = require('apollo-server-express')
 const groups = gql`
     extend type Mutation{
         createGroup(userId: ID!, title: String!, connectionIds:[ID] ): Group
-        destroyGroup( groupId: ID): Group
+        destroyGroup( userId: ID, groupId: ID): Group
     }
     
     type Group {
