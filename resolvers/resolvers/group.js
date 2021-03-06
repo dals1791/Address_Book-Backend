@@ -5,12 +5,13 @@ module.exports ={
     Mutation: {
         createGroup: async (parent, args, context, info)=>{
             const {userId, title, connectionIds} = args
-            console.log(args)
+            
             try{
                const group =  await Group.create({title: title, connections: connectionIds})
-               
-                await User.findByIdAndUpdate({_id: userId}, {$push: {groups: group}})
-                return group
+               console.log(group)
+                const user = await User.findByIdAndUpdate({_id: userId})
+                await user.groups.push(group);
+                return await user.save()                
 
             }catch(error){throw error}
         },
@@ -18,10 +19,16 @@ module.exports ={
             
             const user= await User.findOne({_id: args.userId})
         
-            const groupIndex= user.groups.findIndex((ele)=>ele ==args.groupId) 
+            const groupIndex= user.groups.findIndex((ele)=>ele == args.groupId) 
           
             await user.groups.splice(groupIndex, 1)
-            user.save()
+            
+        }
+    },
+    Group: {
+        connections: async(Group)=>{
+            return (await Group.populate('connections').execPopulate()).connections
         }
     }
+    
 }

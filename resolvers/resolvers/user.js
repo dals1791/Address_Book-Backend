@@ -27,6 +27,14 @@ const user = {
             }catch (error){throw error}
             
         } 
-    }   
+    },  
+    User: {
+        groups: async(User) =>{
+            return (await User.populate("groups").execPopulate()).groups
+        },
+        connections: async(User)=>{
+            return (await User.populate('connections').execPopulate()).connections
+        }
+    } 
 }
 module.exports = user
