@@ -42,9 +42,7 @@ const user = {
         connections: async(User)=>{
             return (await User.populate('connections').execPopulate()).connections
         }
-        // personalContact: async(User)=>{
-        //     return (await User.populate('connections').execPopulate()).connections
-        // }
+        
     } 
 }
 module.exports = user
