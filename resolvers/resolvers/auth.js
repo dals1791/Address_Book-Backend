@@ -2,6 +2,8 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require("../../models/user")
 const userValidate = require('../../configs/validate-schema')
+require('dotenv').config();
+const {SECRET}= process.env
 
 const auth = {
    Query: {
@@ -18,9 +20,10 @@ const auth = {
                     throw new Error('Password does not match username')          
                 }
             })
+            
             const token = jwt.sign(
                 {userId: user.id},
-                'addresssecretkey',
+                `${SECRET}`,
                 { expiresIn: '2h'}
             )
             // context
