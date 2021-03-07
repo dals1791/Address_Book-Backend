@@ -18,14 +18,10 @@ const userSchema = new Schema(
                     state: String,
                     zipcode: Number
                 },
-                phone: {
-                    phone: Number,
-                    
-                },
-                email: {
-                    email: String,
+                phone:  Number,
+                
+                email:  String,
                    
-                }
             
         },
         connections: [{
