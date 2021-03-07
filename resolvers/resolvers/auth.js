@@ -14,7 +14,6 @@ const auth = {
                 }
             
             await bcrypt.compare(password, user.password).then((result)=>{
-                    // console.log(password, user.password, result)
                 if (!result){
                     throw new Error('Password does not match username')          
                 }
@@ -27,6 +26,13 @@ const auth = {
             // context
             return {userId: user.id, token: token,  tokenExpiration: 2} 
         }catch(error){throw error}
+        },
+        userProfile: async (parent, args, context, info)=>{
+            if(!context){
+                throw new Error('Your are not logged in')
+            }
+            console.log(context)
+            return await User.findById(context.userId)
         }
             
     },

@@ -25,6 +25,7 @@ module.exports ={
             
         }
     },
+    // Populates connections field in the parent Type 'Group' after mutating connections
     Group: {
         connections: async(Group)=>{
             return (await Group.populate('connections').execPopulate()).connections

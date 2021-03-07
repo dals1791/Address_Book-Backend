@@ -1,5 +1,4 @@
 const User = require('../../models/user')
-const Connections = require('../../models/connection')
 const Group = require('../../models/group')
 const user = require('../../typeDefs/typeDefs/user')
 const connections = {
@@ -48,7 +47,7 @@ const connections = {
                         throw new Error("${connection.name} is already in this group")
                     }
                     await group.connections.push(userId)
-                    
+
                     return await group.save()
 
                 }catch (error){ throw error}

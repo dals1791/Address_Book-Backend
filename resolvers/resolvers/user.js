@@ -8,17 +8,11 @@ const user = {
         user: (parent, args, ctx, info) =>{
             return User.findOne({handle: args.input.handle})
         }
-        // connections: async (parent, args, ctx, info) =>{
-        //     try{
-        //     const user = await User.findOne({_id: args.userId})
-        //     console.log(user.connections)
-        //     return user.connections
-        //     }catch(error){throw error}
-        // }
     },
 
     Mutation: {
         addContactInfo: async (parent, args, context, info)=>{
+            // *******ADD AUTHENITCATION *********************
             // if (context.userId!=args.userId){
             //     throw new Error("Please Login, not authenticated")
             // }
@@ -27,7 +21,8 @@ const user = {
             }catch (error){throw error}
             
         } 
-    },  
+    }, 
+    // Populates the groups and connections fields of the parent Type User after mutations 
     User: {
         groups: async(User) =>{
             return (await User.populate("groups").execPopulate()).groups

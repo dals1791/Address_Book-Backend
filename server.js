@@ -1,4 +1,4 @@
-const { ApolloServer } =require('apollo-server-express') 
+const { ApolloServer, AuthenticationError } =require('apollo-server-express') 
 const express = require('express');
 const typeDefs =require( "./typeDefs")
 const resolvers =require("./resolvers") 
@@ -13,13 +13,19 @@ const app = express()
 const server = new ApolloServer({
     typeDefs,
     resolvers, 
-    // context: ({req})=>{
+    context:  async ({req})=>{
+        let authenticatedToken = null
+     try{
+        const authHeader = req.headers.authorization || "";
+        if (authHeader){
+           authenticatedToken = await authJWT(authHeader)
+        }
+        
 
-    // }
-// : ({req})=>{
-//         const authHeader = req.headers.authorization || "";
-//         return authJWT(authHeader)     
-// }
+     }catch{throw AuthenticationError}
+     return authenticatedToken
+    }
+    
 })
 
 
@@ -28,4 +34,4 @@ server.applyMiddleware({ app });
 
 app.listen(4000, () =>
     console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
-    )
+)
