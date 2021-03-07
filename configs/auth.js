@@ -9,7 +9,11 @@ const authJWT =  async (authHeader)=>{
             throw new Error('There is no Token')
         }
         let decodedToken;
-        decodedToken=jwt.verify(token, SECRET )
+        decodedToken= await jwt.verify(token, SECRET )
+        
+        if(decodedToken==""||decodedToken==null ||decodedToken == undefined){
+            throw new Error("You are not authenticated")
+        }
     
         return decodedToken
         }
