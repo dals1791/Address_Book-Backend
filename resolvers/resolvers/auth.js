@@ -31,7 +31,6 @@ const auth = {
             if(!context || context.userId == null ||context.userId == ""){
                 throw new Error('Your are not logged in')
             }
-            console.log(context)
             return await User.findById(context.userId)
         }
             
