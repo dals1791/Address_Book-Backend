@@ -4,13 +4,9 @@ const user = gql`
      extend type Query {
         user(input: Handle!): User!
         users:[User!]!
-        # connections(userId: ID!):User
         
     }
-    extend type Mutation {      
-        addContactInfo(input: newContact, userId: ID!): User
-        
-    }
+    
     
     type User {
         _id:ID

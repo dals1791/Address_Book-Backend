@@ -5,26 +5,31 @@ const User = require('../../models/user')
 const user = {
     Query: {
         users: (parent, args, context, info) =>{
-            console.log(context.userId)
-            if (!context.userId){
-                throw new Error('You are not signed in')
+            const {userId} = context
+            if(!context || userId == null ||userId == ""){
+                throw new Error('You are not logged in')
             }
            return User.find()
         
         },
-        user: (parent, args, ctx, info) =>{
+        user: (parent, args, contex, info) =>{
+            const {userId} = context
+            if(!context || userId == null ||userId == ""){
+                throw new Error('You are not logged in')
+            }
             return User.findOne({handle: args.input.handle})
         }
     },
 
     Mutation: {
         addContactInfo: async (parent, args, context, info)=>{
-            // *******ADD AUTHENITCATION *********************
-            // if (context.userId!=args.userId){
-            //     throw new Error("Please Login, not authenticated")
-            // }
+            const {userId} = context
+            if(!context || userId == null ||userId == ""){
+                throw new Error('You are not logged in')
+            }
             try{
-               return User.findByIdAndUpdate(args.userId, {personalContact: args.input})
+               const user = await User.findByIdAndUpdate(userId, {personalContact: args.input})
+               return await user.save()
             }catch (error){throw error}
             
         } 
@@ -37,6 +42,9 @@ const user = {
         connections: async(User)=>{
             return (await User.populate('connections').execPopulate()).connections
         }
+        // personalContact: async(User)=>{
+        //     return (await User.populate('connections').execPopulate()).connections
+        // }
     } 
 }
 module.exports = user
