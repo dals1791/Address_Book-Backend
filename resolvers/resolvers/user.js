@@ -4,7 +4,14 @@ const User = require('../../models/user')
 // const Joi = require('joi')
 const user = {
     Query: {
-        users: (parent, args, ctx, info) =>User.find(),
+        users: (parent, args, context, info) =>{
+            console.log(context.userId)
+            if (!context.userId){
+                throw new Error('You are not signed in')
+            }
+           return User.find()
+        
+        },
         user: (parent, args, ctx, info) =>{
             return User.findOne({handle: args.input.handle})
         }

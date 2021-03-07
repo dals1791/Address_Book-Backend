@@ -4,19 +4,26 @@ const user = require('../../typeDefs/typeDefs/user')
 const connections = {
     Mutation: {
         addConnection: async (parent, args, context, info)=>{
-            const {userId, connectionId} = args
+            const {handle} = args.handle
+            const{userId}= context
+            if(!context || userId == null ||userId == ""){
+                throw new Error('Your are not logged in')
+            }
             try{
                 const user = await User.findByIdAndUpdate({_id: userId})
-                
+                const connection = await User.findOne({handle: handle})
+                const connectionId  = connection._id
+                console.log(user.connections[0])
+                console.log(connectionId)
                 if (connectionId==userId){
                     throw new Error('You cannot add yourself')
                 }
-                if (user.connections.some(connection=>connection._id == connectionId)){
-                    throw new Error("You're already connected")
-                }
                 
+                if (user.connections.includes(connectionId)){
+                    throw new Error("You're already connected")
+                } 
                 await user.connections.push(connectionId)
-                return await user.save()
+                return await user.save()              
             }
             catch (error){ throw error}
         },

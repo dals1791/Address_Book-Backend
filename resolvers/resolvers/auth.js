@@ -28,7 +28,7 @@ const auth = {
         }catch(error){throw error}
         },
         userProfile: async (parent, args, context, info)=>{
-            if(!context){
+            if(!context || context.userId == null ||context.userId == ""){
                 throw new Error('Your are not logged in')
             }
             console.log(context)

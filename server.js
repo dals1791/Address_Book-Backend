@@ -14,12 +14,13 @@ const server = new ApolloServer({
     typeDefs,
     resolvers, 
     context:  async ({req})=>{
-        let authenticatedToken = null
+       let authenticatedToken = null
      try{
         const authHeader = req.headers.authorization || "";
         if (authHeader){
-           authenticatedToken = await authJWT(authHeader)
+         authenticatedToken = await authJWT(authHeader)
         }
+        
         
 
      }catch{throw AuthenticationError}
