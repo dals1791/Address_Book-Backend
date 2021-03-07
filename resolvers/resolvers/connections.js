@@ -53,10 +53,14 @@ const connections = {
                     throw new Error('Your are not logged in')
                 }
                 try{
+                    const user = await User.findOne({_id: userId})
                     const group = await Group.findByIdAndUpdate({_id: groupId})
                     const connection = await User.findOne({handle: handle})
                     const connectionId  = connection._id
-                    
+                    const connectedStatus = user.connections.includes(connectionId)
+                    if (connectedStatus ===false){
+                        throw new Error ('You are not connected, connect with this user first')
+                    }
                     if (userId==connectionId){
                         throw new Error('You cannot add yourself')
                     }
