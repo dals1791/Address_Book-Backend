@@ -5,8 +5,10 @@ const resolvers =require("./resolvers")
 const authJWT = require('./configs/auth')
 // Call express
 const app = express()
+// CORS
+const cors = require("cors");
 //====================== MiddleWare====================
-// app.use(authJWT)
+app.use(cors())
 // ====================================================
 
 // Create apollo server with typeDefs and resolvers
