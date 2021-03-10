@@ -12,10 +12,17 @@ const corsOptions = require("./configs/cors");
 const PORT = process.env.PORT || 4000
 //====================== MiddleWare====================
 app.use(cors());
-// ====================================================
+//====================================================
+if (process.env.NODE_ENV === 'production') {
+    // Exprees will serve up production assets
+    app.use(express.static('client/build'));
+
+    const path = require('path')
+
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
+}
 // Create apollo server with typeDefs and resolvers
 const server = new ApolloServer({
     typeDefs,
@@ -40,9 +47,8 @@ const server = new ApolloServer({
 
 // apply middleware for apolloserver
 server.applyMiddleware({ 
-    app,
-    path: '/' });
+    app });
 
-app.listen(PORT, () =>
+app.listen({port: PORT}, () =>
     console.log(`🚀 Server ready at ${PORT}${server.graphqlPath}`)
 )
