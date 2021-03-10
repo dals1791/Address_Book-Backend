@@ -10,16 +10,13 @@ const userSchema = new Schema(
         name: String,
         handle: {type: String, unique: true},
         personalContact: {
-            
-                address: {
-                    street: String, 
-                    aptNum: Number,
-                    city: String,
-                    state: String,
-                    zipcode: Number
-                },
-                phone:  Number,
-                
+          
+                street: String, 
+                aptNum: Number,
+                city: String,
+                state: String,
+                zipcode: String,
+                phone:  String,
                 email:  String,
                    
             

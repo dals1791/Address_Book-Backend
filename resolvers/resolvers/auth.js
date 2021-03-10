@@ -31,12 +31,13 @@ const auth = {
         }catch(error){throw error}
         },
         userProfile: async (parent, args, context, info)=>{
-            try{ 
-                if(!context || context.userId == null ||context.userId == ""){
-                return error
+            if(!context || context.userId == null ||context.userId == ""){
+                return console.log('You are not Logged In!')
                 }
+            try{ 
+                
             return await User.findById(context.userId)
-        }catch(error){throw error}
+        }catch(error){console.log(error)}
             
         }
             

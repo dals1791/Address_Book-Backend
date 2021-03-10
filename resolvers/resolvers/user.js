@@ -24,11 +24,13 @@ const user = {
     Mutation: {
         addContactInfo: async (parent, args, context, info)=>{
             const {userId} = context
+            console.log(args)
             if(!context || userId == null ||userId == ""){
                 throw new Error('You are not logged in')
             }
             try{
-               const user = await User.findByIdAndUpdate(userId, {personalContact: args.input})
+               const user = await User.findByIdAndUpdate(userId, {personalContact: args})
+               console.log(user)
                return await user.save()
             }catch (error){throw error}
             
