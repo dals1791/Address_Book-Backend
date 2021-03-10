@@ -2,10 +2,10 @@ const {gql} = require('apollo-server-express')
 
 const connections = gql`
     extend type Mutation{
-        addConnection(handle: Handle): User
-        destroyConnection(connectionId: ID!): User
-        addConnectionToGroup(groupId: ID!, handle: Handle): Group
-        destroyConnectionFromGroup(groupId: ID!, handle: Handle): Group
+        addConnection(handle: String): User
+        destroyConnection(connectionId: ID): User
+        addConnectionToGroup(groupId: ID, handle: String): Group
+        destroyConnectionFromGroup(groupId: ID, handle: String): Group
     }
 
     
