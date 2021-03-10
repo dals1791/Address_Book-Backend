@@ -29,7 +29,8 @@ const server = new ApolloServer({
 
      }catch{throw AuthenticationError}
      return authenticatedToken
-    }
+    },
+    playground: true
     
 })
 
