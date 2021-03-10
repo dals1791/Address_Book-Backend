@@ -15,7 +15,7 @@ const user = {
         user: (parent, args, contex, info) =>{
             const {userId} = context
             if(!context || userId == null ||userId == ""){
-                throw new Error('You are not logged in')
+                // throw new Error('You are not logged in')
             }
             return User.findOne({handle: args.input.handle})
         }
