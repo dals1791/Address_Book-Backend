@@ -1,4 +1,5 @@
-const { ApolloServer, AuthenticationError } =require('apollo-server-express') 
+const { ApolloServer, AuthenticationError } =require('apollo-server-express')
+const { PORT = 4000, NODE_ENV = "development" } = process.env; 
 const express = require('express');
 const typeDefs =require( "./typeDefs")
 const resolvers =require("./resolvers") 
@@ -7,8 +8,9 @@ const authJWT = require('./configs/auth')
 const app = express()
 // CORS
 const cors = require("cors");
+const corsOptions = require("./configs/cors");
 //====================== MiddleWare====================
-app.use(cors())
+NODE_ENV === "production" ? app.use(cors(corsOptions)) : app.use(cors());
 // ====================================================
 
 // Create apollo server with typeDefs and resolvers
@@ -35,6 +37,6 @@ const server = new ApolloServer({
 // apply middleware for apolloserver
 server.applyMiddleware({ app });
 
-app.listen(4000, () =>
+app.listen(PORT, () =>
     console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
 )
