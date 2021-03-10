@@ -5,6 +5,7 @@ const resolvers =require("./resolvers")
 const authJWT = require('./configs/auth')
 // Call express
 const app = express()
+path=require("path")
 // CORS
 const cors = require("cors");
 const corsOptions = require("./configs/cors");
