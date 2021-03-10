@@ -4,8 +4,10 @@ const user = require('../../typeDefs/typeDefs/user')
 const connections = {
     Mutation: {
         addConnection: async (parent, args, context, info)=>{
-            const {handle} = args.handle
+            const {handle} = args
             const{userId}= context
+            console.log(handle)
+            console.log(userId)
             if(!context || userId == null ||userId == ""){
                 throw new Error('Your are not logged in')
             }
@@ -38,7 +40,8 @@ const connections = {
                 const connectionIndex= user.connections.findIndex((ele)=>ele == connectionId) 
 
                 await  user.connections.splice(connectionIndex, 1)
-                return await user.save()
+                await user.save()
+                return console.log(`you removed a connection`)
 
             }
             catch (error){ throw error}
@@ -46,9 +49,11 @@ const connections = {
 
         addConnectionToGroup: 
             async (parent, args, context, info)=>{
-                const {groupId} = args
-                const {handle}=args.handle
+                const {groupId, handle} = args
                 const {userId} = context
+                console.log("this is the args handle", handle)
+                console.log("this is groupId", groupId)
+                console.log("this is userId", userId)
                 if(!context || userId == null ||userId == ""){
                     throw new Error('Your are not logged in')
                 }
@@ -76,17 +81,21 @@ const connections = {
         destroyConnectionFromGroup:
             async (parent, args, context, info)=>{
                 const {groupId} = args
-                const {handle}=args.handle
+                const {handle}=args
                 const{userId} = context
                 if(!context || userId == null ||userId == ""){
                     throw new Error('Your are not logged in')
                 }
                 try{
                     const group = await Group.findByIdAndUpdate({_id: groupId})
+                    console.log("group connection array", group.connections[0])
                     const connection = await User.findOne({handle: handle})
+                    console.log("this is the connection", connection)
                     const connectionId  = connection._id
-                   
-                    const connectionIndex= group.connections.findIndex((ele)=>ele == connectionId) 
+                   console.log("connection _Id", connectionId)
+                    const connectionIndex= group.connections.indexOf(connectionId) 
+// console.log("This is findIndex result", group.connections[0]==connectionId)
+            console.log("this is the index of the removed connectio", connectionIndex)
                     await group.connections.splice(connectionIndex, 1)
                     return await group.save()
                 }catch (error){ throw error}

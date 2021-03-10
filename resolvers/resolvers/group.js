@@ -26,7 +26,6 @@ module.exports ={
             }
             try{
                 const user= await User.findOne({_id: userId})
-        
                 const groupIndex= user.groups.findIndex((ele)=>ele == groupId) 
                 await Group.findByIdAndRemove(({_id: groupId}))
                 await user.groups.splice(groupIndex, 1)
