@@ -13,16 +13,16 @@ const PORT = process.env.PORT || 4000
 //====================== MiddleWare====================
 app.use(cors());
 //====================================================
-if (process.env.NODE_ENV === 'production') {
-    // Exprees will serve up production assets
-    app.use(express.static('client/build'));
+// if (process.env.NODE_ENV === 'production') {
+//     // Exprees will serve up production assets
+//     app.use(express.static('client/build'));
 
-    const path = require('path')
+//     const path = require('path')
 
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-}
+// app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+//   });
+// }
 // Create apollo server with typeDefs and resolvers
 const server = new ApolloServer({
     typeDefs,
