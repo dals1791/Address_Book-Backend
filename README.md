@@ -12,10 +12,10 @@ An address book that allows users to store both personal and business contacts. 
 ## Project Links
 - Backend
     - Github: [https://github.com/dals1791/GA-Capstone-backend/tree/main](https://github.com/dals1791/GA-Capstone-backend/tree/main)
-    - live: TBD
+    - live: https://address-book-sd.herokuapp.com/graphql
 - FrontEnd
     - Github: [https://github.com/dals1791/GA-Capstone-frontend](https://github.com/dals1791/GA-Capstone-frontend)
-    - Live: TBD
+    - Live: https://add-ress-book.netlify.app/
 
 
 ## User Stories
