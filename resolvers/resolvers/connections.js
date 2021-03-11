@@ -6,8 +6,8 @@ const connections = {
         addConnection: async (parent, args, context, info)=>{
             const {handle} = args
             const{userId}= context
-            console.log(handle)
-            console.log(userId)
+            // console.log(handle)
+            // console.log(userId)
             if(!context || userId == null ||userId == ""){
                 throw new Error('Your are not logged in')
             }
@@ -51,9 +51,9 @@ const connections = {
             async (parent, args, context, info)=>{
                 const {groupId, handle} = args
                 const {userId} = context
-                console.log("this is the args handle", handle)
-                console.log("this is groupId", groupId)
-                console.log("this is userId", userId)
+                // console.log("this is the args handle", handle)
+                // console.log("this is groupId", groupId)
+                // console.log("this is userId", userId)
                 if(!context || userId == null ||userId == ""){
                     throw new Error('Your are not logged in')
                 }
@@ -88,14 +88,14 @@ const connections = {
                 }
                 try{
                     const group = await Group.findByIdAndUpdate({_id: groupId})
-                    console.log("group connection array", group.connections[0])
+                    // console.log("group connection array", group.connections[0])
                     const connection = await User.findOne({handle: handle})
-                    console.log("this is the connection", connection)
+                    // console.log("this is the connection", connection)
                     const connectionId  = connection._id
-                   console.log("connection _Id", connectionId)
+                //    console.log("connection _Id", connectionId)
                     const connectionIndex= group.connections.indexOf(connectionId) 
 // console.log("This is findIndex result", group.connections[0]==connectionId)
-            console.log("this is the index of the removed connectio", connectionIndex)
+            // console.log("this is the index of the removed connectio", connectionIndex)
                     await group.connections.splice(connectionIndex, 1)
                     return await group.save()
                 }catch (error){ throw error}
