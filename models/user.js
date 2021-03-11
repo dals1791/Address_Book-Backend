@@ -12,7 +12,7 @@ const userSchema = new Schema(
         personalContact: {
           
                 street: String, 
-                aptNum: Number,
+                aptNum: String,
                 city: String,
                 state: String,
                 zipcode: String,

@@ -7,7 +7,7 @@ const contact = gql`
             phone: String
             email: String
             street: String
-            aptNum: Int
+            aptNum: String
             city: String
             state: String
             zipcode: String
@@ -15,7 +15,7 @@ const contact = gql`
     }
     type Contact{
         street: String
-        aptNum: Int
+        aptNum: String
         city: String
         state: String
         zipcode: String
